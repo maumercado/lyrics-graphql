@@ -1,0 +1,37 @@
+{
+    "name": "lyrical-graphql",
+    "version": "1.0.0",
+    "description": "Simple GraphQL application using koajs",
+    "main": "index.js",
+    "scripts": {
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "node index.js",
+        "client": "node start-client",
+        "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    },
+    "keywords": [
+        "graphql",
+        "koajs",
+        "react"
+    ],
+    "author": "Mauricio Mercado",
+    "license": "ISC",
+    "dependencies": {
+        "boom": "^7.1.1",
+        "bunyan": "^1.8.12",
+        "graphql": "^0.11.7",
+        "koa": "^2.4.1",
+        "koa-bunyan": "^1.0.0",
+        "koa-graphql": "^0.7.3",
+        "koa-router": "^7.3.0",
+        "koa-static": "^4.0.2",
+        "mongoose": "^4.13.5"
+    },
+    "devDependencies": {
+        "babel-eslint": "^8.0.3",
+        "concurrently": "^3.5.1",
+        "eslint": "^4.12.1",
+        "nodemon": "^1.12.1",
+        "prettier-eslint": "^8.2.2"
+    }
+}
