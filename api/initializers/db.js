@@ -2,15 +2,24 @@ const mongoose = require("mongoose");
 const config = require("../../config/default");
 const log = require("./logger").child({ initializer: "db" });
 
-const MONGO_URI = config.db.url;
+const MONGO_URL = config.db.url;
 
-if (!MONGO_URI) {
+if (!MONGO_URL) {
     throw new Error("You must provide a MongoLab URI");
 }
 
-module.exports = initDb = () => {
+module.exports = initDb = async () => {
     mongoose.Promise = global.Promise;
 
-    mongoose.connection.once("open", () => log.info("Initializing Mongo"));
-    mongoose.connection.on("error", err => log.debug({ err }, "Mongo Error"));
+    try {
+        const con = await mongoose.connect(MONGO_URL, { useMongoClient: true });
+        let { host, port, user, name, options, readyState } = con;
+        log.info(
+            { host, port, user, name, options, readyState },
+            "connected to mongo"
+        );
+    } catch (err) {
+        log.debug({ err }, "Error connecting to mongo");
+        throw new Error(err);
+    }
 };

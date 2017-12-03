@@ -3,8 +3,8 @@ const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
 const SongType = require("./song_type");
 const LyricType = require("./lyric_type");
-const Lyric = mongoose.model("lyric");
-const Song = mongoose.model("song");
+const Lyric = require("../models/lyrics");
+const Song = require("../models/song");
 const log = require("../initializers/logger").child({
     schema: "Root query type"
 });
@@ -16,7 +16,9 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(SongType),
             async resolve() {
                 try {
-                    return await Song.find({});
+                    log.info("Find all songs");
+                    const songs = await Song.find({});
+                    return songs;
                 } catch (err) {
                     log.debug({ err }, "Error finding song");
                     throw new Error(err);

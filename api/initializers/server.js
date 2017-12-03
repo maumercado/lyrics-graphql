@@ -1,13 +1,12 @@
 const Koa = require("koa");
 const path = require("path");
-const koaLogger = require("koa-bunyan");
+const koaLogger = require("../middlewares/logging");
 const Boom = require("boom");
-const logger = require("./logger");
 const config = require("../../config/default");
 const serve = require("koa-static");
 const router = require("../routes");
 const db = require("../initializers/db");
-// const models = require("../models");
+const logger = require("./logger");
 
 module.exports = initServer = () => {
     const app = new Koa();
@@ -20,7 +19,7 @@ module.exports = initServer = () => {
             level: "debug",
             // this is optional. Here you can provide request time in ms,
             // and all requests longer than specified time will have level 'warn'
-            timeLimit: 100
+            timeLimit: 150
         })
     );
 

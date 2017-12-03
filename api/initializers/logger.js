@@ -3,5 +3,6 @@ const name = require("../../package.json").name;
 
 module.exports = bunyan.createLogger({
     name,
-    serializers: bunyan.stdSerializers
+    serializers: bunyan.stdSerializers,
+    level: "debug"
 });

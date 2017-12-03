@@ -14,6 +14,7 @@ const SongType = new GraphQLObjectType({
             type: new GraphQLList(LyricType),
             async resolve(parentValue) {
                 try {
+                    log.info({ id: parentValue.id }, "Finding song");
                     return await Song.findLyrics(parentValue.id);
                 } catch (err) {
                     log.debug(
