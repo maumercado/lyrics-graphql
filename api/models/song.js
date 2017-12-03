@@ -16,10 +16,10 @@ const SongSchema = new Schema({
     ]
 });
 
-SongSchema.statics.addLyric = async (id, content) => {
+SongSchema.statics.addLyric = async function(id, content) {
     try {
         const Lyric = mongoose.model("lyric");
-
+        debugger;
         const song = await this.findById(id);
         const lyric = new Lyric({ content, song });
         song.lyrics.push(lyric);
@@ -34,7 +34,7 @@ SongSchema.statics.addLyric = async (id, content) => {
     }
 };
 
-SongSchema.statics.findLyrics = async id => {
+SongSchema.statics.findLyrics = async function(id) {
     try {
         const song = await this.findById(id).populate("lyrics");
         return song.lyrics;

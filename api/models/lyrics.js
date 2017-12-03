@@ -10,11 +10,10 @@ const LyricSchema = new Schema({
     content: { type: String }
 });
 
-LyricSchema.statics.like = async id => {
+LyricSchema.statics.like = async function(id) {
     try {
-        const Lyric = mongoose.model("lyric");
         log.info({ id }, "Finding lyric");
-        const lyric = await Lyric.findById(io);
+        const lyric = await this.findById(io);
         ++lyric.likes;
         return lyric.save();
     } catch (err) {
