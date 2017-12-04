@@ -43,7 +43,7 @@ module.exports = function(logger, opts) {
                     query: ctx.query,
                     method: ctx.method.toUpperCase(),
                     status: ctx.status,
-                    timer: `${requestTime} ms`
+                    timer: requestTime
                 },
                 util.format(
                     "[RESPONSE] %s %s (%s) took %s ms",
