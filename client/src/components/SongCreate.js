@@ -3,8 +3,10 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
+import { Link } from "react-router-dom";
+import { compose } from "recompose";
 
-import { compose, withHandlers } from "recompose";
+import query from "../queries/fetchSongs";
 import { submitSongCreate } from "../actions";
 
 const validate = values => {
@@ -25,18 +27,32 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
 };
 
 class SongCreate extends Component {
-    handleFormSubmit = ({ title }) => {
-        this.props.mutate({
-            variables: { title }
-        });
-        this.props.submitSongCreate(title);
-        this.props.history.push("/");
+    handleFormSubmit = async ({ title }) => {
+        try {
+            await this.props.mutate({
+                variables: { title },
+                refetchQueries: [{ query }]
+            });
+            this.props.submitSongCreate(title);
+            this.props.history.push("/");
+        } catch (e) {
+            // component did catch ;)
+            throw new Error(e);
+        }
     };
 
     render() {
         const { handleSubmit } = this.props;
         return (
             <div>
+                <div className="row">
+                    <Link
+                        to="/"
+                        className="btn-floating btn-large waves-effect waves-light left"
+                    >
+                        <i className="material-icons">arrow_back</i>
+                    </Link>
+                </div>
                 <h3>Create a New Song</h3>
                 <form onSubmit={handleSubmit(this.handleFormSubmit)}>
                     <Field
