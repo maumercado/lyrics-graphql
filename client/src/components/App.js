@@ -8,7 +8,10 @@ import store, { history } from "../store";
 import client from "../apolloClient";
 
 import SongList from "./SongList";
+import SongDetail from "./SongDetail";
 import SongCreate from "./SongCreate";
+
+import "../styles/styles.css";
 
 const App = () => {
     return (
@@ -19,6 +22,7 @@ const App = () => {
                         <Switch>
                             <Route exact path="/" component={SongList} />
                             <Route path="/songs/new" component={SongCreate} />
+                            <Route path="/songs/:id" component={SongDetail} />
                         </Switch>
                     </div>
                 </ConnectedRouter>
