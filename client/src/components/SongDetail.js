@@ -22,7 +22,7 @@ class SongDetail extends Component {
                     </Link>
                 </div>
                 <h3>{song.title}</h3>
-                <LyricCreate />
+                <LyricCreate songId={this.props.match.params.id} />
             </div>
         );
     }
