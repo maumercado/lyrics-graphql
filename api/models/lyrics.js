@@ -13,7 +13,7 @@ const LyricSchema = new Schema({
 LyricSchema.statics.like = async function(id) {
     try {
         log.info({ id }, "Finding lyric");
-        const lyric = await this.findById(io);
+        const lyric = await this.findById(id);
         ++lyric.likes;
         return lyric.save();
     } catch (err) {
