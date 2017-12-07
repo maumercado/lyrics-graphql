@@ -33,7 +33,6 @@ class SongCreate extends Component {
                 variables: { title },
                 refetchQueries: [{ query }]
             });
-            this.props.submitSongCreate(title);
             this.props.history.push("/");
         } catch (e) {
             // component did catch ;)

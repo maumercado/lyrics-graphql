@@ -24,7 +24,6 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
 
 class LyricCreate extends Component {
     handleFormSubmit = async ({ content }) => {
-        console.log(this.props);
         await this.props.mutate({
             variables: {
                 content,
@@ -54,6 +53,7 @@ const mutation = gql`
         addLyricToSong(content: $content, songId: $songId) {
             id
             lyrics {
+                id
                 content
             }
         }
