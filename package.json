@@ -17,7 +17,7 @@
     "author": "Mauricio Mercado",
     "license": "ISC",
     "dependencies": {
-        "boom": "^7.1.1",
+        "boom": "^7.3.0",
         "bunyan": "^1.8.12",
         "graphql": "^0.11.7",
         "koa": "^2.4.1",
